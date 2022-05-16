@@ -10,6 +10,7 @@ import MyProfile from './Components/MyProfile';
 import Subjects from './Components/Subject';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
+import Paper from './Components/Paper';
 
 
 function App() {
@@ -28,11 +29,15 @@ function App() {
             <Home globalData = {data} setGlobalData={setData}/>
             <Carousel />
           </Route>
-          <Route exact path="/Resources/:id" >
+          <Route exact path="/Resources/:branch" >
             <Resources globalData={data} />
           </Route>
-          <Route exact path="/Subjects/:id1/:id2" >
+          <Route exact path="/Subjects/:branch/:year" >
             <Subjects globalData={data}/>
+          </Route>
+          
+          <Route exact path="/Paper/:branch/:year/:subject" >
+            <Paper />
           </Route>
 
           <Route exact path="/User">

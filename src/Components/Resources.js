@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import useFetch from "./UseFetch";
 const Resources = ({ globalData }) => {
-    const { id } = useParams();
+    const { branch } = useParams();
 
     const [year, setYear] = useState([])
 
@@ -40,7 +40,7 @@ const Resources = ({ globalData }) => {
                         {
                             (year).map(element => (
                                 <div>
-                                    <Link to={`/Subjects/${id}/${element.year}`}>
+                                    <Link to={`/Subjects/${branch}/${element.year}`}>
                                         <a href={element.src} target="_blank">
                                             <div className="card Resources-card"  >
                                                 <div className="card-body">
