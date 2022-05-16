@@ -2,6 +2,7 @@
 
 import Cards from './Cards'
 import useFetch from './UseFetch';
+import { useState,useEffect } from 'react';
 
 const Home = ({globalData , setGlobalData}) => {
   const { data, isPending, error } = useFetch('http://localhost:8000/metaData/fetch');
@@ -24,7 +25,7 @@ const Home = ({globalData , setGlobalData}) => {
       <hr style={{color:"white",margin:"3rem"}}/>
       {error && <div>{error}</div>}
       {isPending && <div>Loading....</div>}
-      {data && <Cards data={data} title='All Years' />}
+      {data && <Cards data={data} title='All Branches' />}
       <hr style={{color:"white",margin:"3rem"}}/>
     </div>
   );

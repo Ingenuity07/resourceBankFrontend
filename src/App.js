@@ -7,7 +7,7 @@ import Footer from './Components/Footer';
 import Home from './Components/Home';
 import User from './Components/User';
 import MyProfile from './Components/MyProfile';
-import Subject from './Components/Subject';
+import Subjects from './Components/Subject';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/Resources/:id" >
             <Resources globalData={data} />
           </Route>
-          <Route exact path="/Subjects/:id" >
+          <Route exact path="/Subjects/:id1/:id2" >
             <Subjects globalData={data}/>
           </Route>
 

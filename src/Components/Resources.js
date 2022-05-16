@@ -1,43 +1,60 @@
 import { useParams } from "react-router";
+import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom"
 import useFetch from "./UseFetch";
-const Resources = ({globalData}) => {
+const Resources = ({ globalData }) => {
     const { id } = useParams();
 
-    
+    const [year, setYear] = useState([])
+
+    const key = 'year';
+
+    function compare(a, b) {
+        if (a.year > b.year) return 1;
+        if (a.year < b.year) return -1;
+        return 0;
+    }
+
+
+    useEffect(() => {
+        const unique = [...new Map(globalData.map(item =>
+            [item[key], item])).values()];
+
+        unique.sort(compare)
+        setYear(unique)
+
+        console.log(year)
+    }, [])
+
 
 
     return (
 
         <div >
-            
-            {globalData && (
-         
+
+            {year && (
+
                 <article >
-                <h2 style={{ color: "white" }}>{data.title}</h2>
+                    <h2 style={{ color: "white" }}>All yeares</h2>
                     <div className="cards Resources-cards">
                         {
-                            (data.details).map(element => (
-                                
+                            (year).map(element => (
                                 <div>
-                                    <a href={element.src} target="_blank">
-                                        <div className="card Resources-card"  >
-                                            <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                                                <img src={data.src} className="card-img-top" alt="hb" />
+                                    <Link to={`/Subjects/${id}/${element.year}`}>
+                                        <a href={element.src} target="_blank">
+                                            <div className="card Resources-card"  >
+                                                <div className="card-body">
+                                                    <h2 className="card-title">{element.year}</h2>
+                                                </div>
                                             </div>
-                                            <div className="card-body">
-                                                <h2 className="card-title">{element.title}</h2>
-                                                <h3>{element.org}</h3>
-                                                <h3>{element.lang}</h3>
-                                                <h3>{element.difficulty}</h3>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </Link>
                                 </div>
                             ))
                         }
                     </div>
                 </article>
-            
+
             )
 
             }

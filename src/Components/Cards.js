@@ -3,13 +3,13 @@ import { useState,useEffect } from "react";
 import { Link } from "react-router-dom"
 
 const Cards = ({ data, title }) => {
-   const [year,setYear]=useState([])
+   const [branch,setbranch]=useState([])
  
-   const key = 'year';
+   const key = 'branch';
    
    function compare(a, b) {
-    if (a.year> b.year) return 1;
-    if (a.year < b.year) return -1;
+    if (a.branch> b.branch) return 1;
+    if (a.branch < b.branch) return -1;
     return 0;
   }
 
@@ -20,9 +20,9 @@ const Cards = ({ data, title }) => {
           
         console.log(unique)
         unique.sort(compare)
-        setYear(unique)
+        setbranch(unique)
         
-        console.log(year)
+        console.log(branch)
     }, [])
     
 
@@ -33,8 +33,8 @@ const Cards = ({ data, title }) => {
             <h1 style={{ margin: "1rem", color: "white" }} >{title}</h1>
             <div className="cards cards-crd">
                 {
-                    year.map(element => (
-                        <Link to={`/Resources/${element.year}`}>
+                    branch.map(element => (
+                        <Link to={`/Resources/${element.branch}`}>
                             <div className="card card-crd" >
                                 {/* <img  className="card-img-top" alt="..." /> */}
                                 <div className="card-body">
