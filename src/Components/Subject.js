@@ -7,25 +7,26 @@ const Subjects = ({ globalData }) => {
 
     console.log(id1,id2)
 
-    const [year, setYear] = useState([])
-
-    const key = 'year';
+    const [subjects, setSubjects] = useState([])
 
     function compare(a, b) {
-        if (a.year > b.year) return 1;
-        if (a.year < b.year) return -1;
+        if (a.subject > b.subject) return 1;
+        if (a.subject < b.subject) return -1;
         return 0;
     }
 
 
     useEffect(() => {
-        const unique = [...new Map(globalData.map(item =>
-            [item[key], item])).values()];
+        const unique = globalData.filter((ele)=>{
+            if(ele.year==id2&&ele.branch==id1)
+                return ele;
+        })
 
         unique.sort(compare)
-        setYear(unique)
+        setSubjects(unique)
 
-        console.log(year)
+        console.log(unique)
+
     }, [])
 
 
@@ -34,18 +35,18 @@ const Subjects = ({ globalData }) => {
 
         <div >
 
-            {year && (
+            {subjects && (
 
                 <article >
                     <h2 style={{ color: "white" }}>All Subjects</h2>
                     <div className="cards Resources-cards">
                         {
-                            (year).map(element => (
+                            (subjects).map(element => (
                                 <div>
-                                        <a href={element.src} target="_blank">
+                                        <a  target="_blank">
                                             <div className="card Resources-card"  >
                                                 <div className="card-body">
-                                                    <h2 className="card-title">{element.year}</h2>
+                                                    <h2 className="card-title">{element.subject}</h2>
                                                 </div>
                                             </div>
                                         </a>
