@@ -6,7 +6,7 @@ import axios from 'axios'
 
 import { Button, Upload } from "antd"
 
-const Paper = () => {
+const Paper = ({profile}) => {
     const [file, setFile] = useState([])
     const [defaultFileList, setDefaultFileList] = useState([]);
     const { branch, year, subject } = useParams();
@@ -64,7 +64,7 @@ const Paper = () => {
         <div >
             {error && <div>{error}</div>}
             {isPending && <div>Loading....</div>}
-            {paper && (
+            {profile && paper && (
 
                 <article >
                     {console.log(paper)}

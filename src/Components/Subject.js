@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
+import { useHistory } from "react-router";
 import useFetch from "./UseFetch";
-const Subjects = ({ globalData }) => {
+const Subjects = ({ globalData ,profile}) => {
     const { branch,year } = useParams();
-
+    const history = useHistory();
 
     const [subjects, setSubjects] = useState([])
 
@@ -29,28 +30,39 @@ const Subjects = ({ globalData }) => {
     }, [])
 
 
+    const handleClick=(subject)=>{
+        if(profile===true)
+            history.push(`/Paper/${branch}/${year}/${subject}`)
+        else
+            history.push("/User")
+
+    }
+
+
+
+
 
     return (
 
         <div >
 
-            {subjects && (
+            {subjects  && (
 
                 <article >
-                    <h2 style={{ color: "white" }}>All Subjects</h2>
-                    <div className="cards Resources-cards">
+                    <h2 style={{ color: "white" }}>Choose Subject</h2>
+                    <div className="cards cards-crd">
                         {
                             (subjects).map(element => (
                                 <div>
-                                    <Link to={`/Paper/${branch}/${year}/${element.subject}`}>
-                                        <a  target="_blank">
-                                            <div className="card Resources-card"  >
+                                        
+                                            <div className="card card-crd"  >
                                                 <div className="card-body">
                                                     <h2 className="card-title">{element.subject}</h2>
                                                 </div>
+                                                <button className="btn" onClick={()=>{handleClick(element.subject)}}>DOWNLOAD || UPLOAD</button>
                                             </div>
-                                        </a>
-                                        </Link>
+                                        
+                                        
                                 </div>
                             ))
                         }

@@ -13,7 +13,7 @@ body {
   /* background-image: url("../src/images/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat; */
-  background-color: black;
+  background-color: rgb(187, 171, 171);
   /* background: url("../src/videos/video1.mp4"); */
   
 
@@ -132,8 +132,9 @@ code {
 
 }
 .card-crd{
-  width: 15rem;
+  width: 17rem;
   margin: 2rem;
+  height: 18rem;
   transition: transform 0.2s ease;
   color: white;
   background-color: black;
@@ -282,7 +283,7 @@ code {
   margin: 0 10px;
 }
 .btn{
-  width: 100%;
+  width: 90%;
   background: none;
   background-color: transparent;
   border: 2px solid #674cff;
@@ -292,19 +293,3 @@ code {
   cursor: pointer;
   margin: 12px 0;
 }
-
-/* HOME */
-
-/* .home{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.div-home{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10vw;
-  height: 25vh;
-} */

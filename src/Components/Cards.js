@@ -36,7 +36,6 @@ const Cards = ({ data, title }) => {
                     branch.map(element => (
                         <Link to={`/Resources/${element.branch}`}>
                             <div className="card card-crd" >
-                                {/* <img  className="card-img-top" alt="..." /> */}
                                 <div className="card-body">
                                     <h5 className="card-title">{element.branch}</h5>
                                 </div>

@@ -35,14 +35,14 @@ const Resources = ({ globalData }) => {
             {year && (
 
                 <article >
-                    <h2 style={{ color: "white" }}>All yeares</h2>
-                    <div className="cards Resources-cards">
+                    <h2 style={{ color: "white" }}>Choose Year</h2>
+                    <div className="cards cards-crd">
                         {
                             (year).map(element => (
                                 <div>
                                     <Link to={`/Subjects/${branch}/${element.year}`}>
                                         <a href={element.src} target="_blank">
-                                            <div className="card Resources-card"  >
+                                            <div className="card card-crd"  >
                                                 <div className="card-body">
                                                     <h2 className="card-title">{element.year}</h2>
                                                 </div>

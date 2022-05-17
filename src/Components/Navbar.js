@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import axios from "axios";
 
+const Navbar = ({profile,setProfile}) => {
+  const history = useHistory();
 
-const Navbar = (props) => {
+  const handleClick = ()=>{
+
+      axios.get("http://localhost:8000/credential/user/logout")
+
+      setProfile(false)
+      history.push("/")  
+  }
 
 
   return (
@@ -15,45 +25,39 @@ const Navbar = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link active" to="/" style={{ color: "white" }}><i className="fa fa-fw fa-home"></i> Home</Link>
 
               </li>
               <li className="nav-item">
 
                 <Link className="nav-link" to="/" style={{ color: "white" }}><i className="fa fa-fw fa-envelope"></i> Contact</Link>
-              </li>
+              </li> */}
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                {/* <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false" style={{ color: "white" }}>
                   Categories
-                </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                </Link> */}
+                {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><Link className="dropdown-item" to="/">Laptops</Link></li>
                   <li><Link className="dropdown-item" to="/">Mobiles</Link></li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li><Link className="dropdown-item" to="/">Aur nhi hmre pass!</Link></li>
-                </ul>
+                </ul> */}
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link disabled" to="/" tabindex="-1" aria-disabled="true">Disabled</Link>
-              </li>
+              </li> */}
             </ul>
 
-            {!props.profile && <Link to="/User">
-              <button className="btn btn-outline-success" type="submit" style={{ color: "white", borderRadius: "10px", margin: "0px" }}>Signin</button>
+            {!profile && <Link to="/User">
+              <button className="btn btn-outline-success" type="submit" style={{ color: "white", borderRadius: "10px", margin: "0px" , width:"100px"}}>Signin</button>
             </Link>}
-            {props.profile && <Link to="/MyProfile">
-                <div className="dropdown" >
-                  <i className="fa fa-fw fa-user"></i>
-                  
-                  
-                </div>
-                
-              </Link>}
-
+            {profile && 
+                  <button className="btn btn-outline-success" type="submit" style={{ color: "white", borderRadius: "10px", margin: "0px" , width:"100px" }}onClick={handleClick} >Log Out</button>
+            }
           </div>
         </div>
       </nav>

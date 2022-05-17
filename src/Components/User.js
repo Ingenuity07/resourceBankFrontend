@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import useFetch from "./UseFetch";
 
-const User = (props) => {
+const User = ({setProfile}) => {
 
 
     const [password, setPassword] = useState("");
@@ -26,10 +26,18 @@ const User = (props) => {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(user_data)
-        }).then(
-            setRegistered(false),
-            history.push("/")
+        }).then((res)=>{
+            if(res.status!==200)
+                throw new Error("Unauthorized")
+
+            setRegistered(false);
+            setProfile(true);
+            history.push("/")}
         )
+        .catch((err)=>{
+            setRegistered(false);;
+            setIsValid(true)
+        })
     }   
 
     const handleSignIn =(event)=>{
@@ -43,10 +51,16 @@ const User = (props) => {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(user_data)
-        }).then(
-            setRegistered(false),
-            history.push("/")
+        }).then((res)=>{
+            if(res.status!==200)
+                throw new Error("Unauthorized")
+            setRegistered(false);
+            setProfile(true);
+            history.push("/")}
         )
+        .catch((err)=>{
+            setRegistered(false);;
+            setIsValid(true)})
 
         
 
@@ -57,7 +71,7 @@ const User = (props) => {
 
         <div className="signup-content">
             <div className="login-box">
-                <h2>CODE EASY</h2>
+                <h2>RESOURCE BANK</h2>
                 { !choice && 
                 <form onSubmit={handleSignUp} className="form">
                     <div className="textbox">
@@ -82,7 +96,7 @@ const User = (props) => {
                     </div>
                     {!registered && <button className="btn btn-outline-success" type="submit" style={{ color: "white" }}><i className="fa fa-fw fa-user"></i>SignUp</button>}
                     {registered && <button className="btn btn-outline-success" type="submit" style={{ color: "white" }} disabled><i className="fa fa-fw fa-user"></i>Signing..</button>}
-                    
+                    {isValid && <p style={{color:"red"}} >Invalid username or password !</p> }
                     <button className="btn btn-outline-success" onClick={()=>setChoice(true)}>Login</button>
                 </form>
                 }

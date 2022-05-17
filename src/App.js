@@ -14,9 +14,8 @@ import Paper from './Components/Paper';
 
 
 function App() {
-  const [profile, setProfile] = useState(false);
+  const [profile, setProfile] = useState(true);
   const [userData, setUserData] = useState(null);
-
   const [data,setData] = useState({});
 
   return (
@@ -33,20 +32,18 @@ function App() {
             <Resources globalData={data} />
           </Route>
           <Route exact path="/Subjects/:branch/:year" >
-            <Subjects globalData={data}/>
+            <Subjects globalData={data}  profile={profile} setProfile={setProfile} />
           </Route>
           
-          <Route exact path="/Paper/:branch/:year/:subject" >
-            <Paper />
-          </Route>
+          {profile&&<Route  exact path="/Paper/:branch/:year/:subject" >
+            <Paper profile={profile} />
+          </Route>}
 
           <Route exact path="/User">
             <User profile={profile} setProfile={setProfile} setUserData={setUserData}/>
           </Route>
 
-          <Route exact path="/MyProfile">
-            <MyProfile  userData={userData} setUserData={setUserData}/>
-          </Route>
+         
 
         </Switch>
         <Footer />
