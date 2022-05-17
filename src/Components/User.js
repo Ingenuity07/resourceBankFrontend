@@ -49,11 +49,7 @@ const User = (props) => {
             history.push("/")
         )
 
-        // if(!milGya){
-        //     console.log("nhi mila");
-        //     setIsValid(true);
-        //     setRegistered(false); 
-        // }
+        
 
         }
 
@@ -89,7 +85,7 @@ const User = (props) => {
                     {registered && <button className="btn btn-outline-success" type="submit" style={{ color: "white" }} disabled><i className="fa fa-fw fa-user"></i>Signing..</button>}
                     
                     <button className="btn btn-outline-success" onClick={()=>setChoice(true)}>Login</button>
-               </form>
+                </form>
                 }
 
                 { 
@@ -131,3 +127,4 @@ const User = (props) => {
 }
 
 export default User;
+
