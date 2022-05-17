@@ -5,21 +5,25 @@ import useFetch from "./UseFetch";
 
 const User = (props) => {
 
-    const [username, setUsername] = useState("");
+
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [registered, setRegistered] = useState(false);
     const [choice, setChoice] = useState(true);
     const [isValid, setIsValid] = useState(false);
     const history = useHistory();
 
-    const { data, error, isPending } = useFetch('http://localhost:8000/userinfo');
+    // const { data, error, isPending } = useFetch('http://localhost:8000/credential/user/signin');
+
+    console.log(username)
+    console.log(password)
+
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        const user_data = { username, email, password };
+        const user_data = {  username, password };
         setRegistered(true);
-        fetch("http://localhost:8000/userinfo", {
+        fetch("http://localhost:8000/credential/user/signup", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(user_data)
@@ -30,25 +34,26 @@ const User = (props) => {
     }   
 
     const handleSignIn =(event)=>{
-        let milGya=false;
         event.preventDefault();
+        const user_data = {  username, password };
+
+        console.log(user_data)
+
         setRegistered(true);
-        data.map((element)=>{
+        fetch("http://localhost:8000/credential/user/signin", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(user_data)
+        }).then(
+            setRegistered(false),
+            history.push("/")
+        )
 
-            if(email === element.email)
-            {   milGya=true;
-                props.setProfile(true);
-                props.setUserData(element.id);
-                setRegistered(false);
-                history.push('/');    
-            }
-        })
-
-        if(!milGya){
-            console.log("nhi mila");
-            setIsValid(true);
-            setRegistered(false); 
-        }
+        // if(!milGya){
+        //     console.log("nhi mila");
+        //     setIsValid(true);
+        //     setRegistered(false); 
+        // }
 
         }
 
@@ -61,23 +66,13 @@ const User = (props) => {
                 { !choice && 
                 <form onSubmit={handleSignUp} className="form">
                     <div className="textbox">
-                        <i className="fas fa-user"></i>
+                        <i className="fas fa-envelope"></i>
                         <input
-                            type="text"
+                            type="email"
                             placeholder="Username"
                             required
                             value={username}
                             onChange={(event) => setUsername(event.target.value)}
-                        />
-                    </div>
-                    <div className="textbox">
-                        <i className="fas fa-envelope"></i>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            required
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
                         />
                     </div>
                     <div className="textbox">
@@ -97,16 +92,19 @@ const User = (props) => {
                </form>
                 }
 
-                { choice && <form onSubmit={handleSignIn}>
+                { 
+                choice && 
+                <form onSubmit={handleSignIn}>
                     
                     <div className="textbox">
                         <i className="fas fa-user"></i>
                         <input
-                            type="text"
-                            placeholder="Email"
+                            type="email"
+                            placeholder="Username"
                             required
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)}
+                            
                         />
                     </div>
                     <div className="textbox">
